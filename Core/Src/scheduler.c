@@ -10,66 +10,71 @@
 #include "main.h"
 
 sTask SCH_tasks_G[SCH_MAX_TASKS];
+uint8_t currentID = 0;
 
 void SCH_init(void) {
-	uint16_t i;
-	for (i=0; i<SCH_MAX_TASKS; i++) {
-		SCH_delete_task(i);
+	uint8_t id;
+	for (id=0; id<SCH_MAX_TASKS; id++) {
+		SCH_delete_task(id);
 	}
+	currentID = 0;
 //	error_code_G = 0;
 	timer_init();
 }
 
 void SCH_update(void) {
-	uint16_t index;
+	uint8_t id;
 	update_timer();
-	for (index=0; index<SCH_MAX_TASKS; index++) {
-		if (SCH_tasks_G[index].pTask) {
-			if (SCH_tasks_G[index].delay==0) {
-				SCH_tasks_G[index].runMe += 1;
-				if (SCH_tasks_G[index].period)
-					SCH_tasks_G[index].delay = SCH_tasks_G[index].period;
+	for (id=0; id<currentID; id++) {
+		if (SCH_tasks_G[id].pTask) {
+			if (SCH_tasks_G[id].delay==0) {
+				SCH_tasks_G[id].runMe += 1;
+				if (SCH_tasks_G[id].period)
+					SCH_tasks_G[id].delay = SCH_tasks_G[id].period;
 				else ;
 			}
 			else
-				SCH_tasks_G[index].delay -= 1;
+				SCH_tasks_G[id].delay -= 1;
 		}
 	}
 }
 
-uint16_t SCH_add_task(void (*pFunction)(), unsigned int DELAY, unsigned int PERIOD) {
-	uint16_t index = 0;
-	while ( (SCH_tasks_G[index].pTask != 0) && (index < SCH_MAX_TASKS) )
-		index++;
-	if (index==SCH_MAX_TASKS)
+uint8_t SCH_add_task(void (*pFunction)(), unsigned int DELAY, unsigned int PERIOD) {
+	uint8_t id = 0;
+	while ( (SCH_tasks_G[id].pTask != 0) && (id < SCH_MAX_TASKS) )
+		id++;
+	if (id==SCH_MAX_TASKS)
 		return SCH_MAX_TASKS;
-	SCH_tasks_G[index].pTask = pFunction;
-	SCH_tasks_G[index].delay = DELAY;
-	SCH_tasks_G[index].period = PERIOD;
-	SCH_tasks_G[index].runMe = 0;
-
-	return index;
+	SCH_tasks_G[id].pTask = pFunction;
+	SCH_tasks_G[id].delay = DELAY;
+	SCH_tasks_G[id].period = PERIOD;
+	SCH_tasks_G[id].runMe = 0;
+	SCH_tasks_G[id].taskID = currentID;
+	currentID += 1;
+	return id;
 }
 
 void SCH_dispatch_tasks(void) {
-	uint16_t index;
-	for (index = 0; index<SCH_MAX_TASKS; index++) {
-		if (SCH_tasks_G[index].runMe>0) {
-			(*SCH_tasks_G[index].pTask)();
-			SCH_tasks_G[index].runMe -= 1;
-			if (SCH_tasks_G[index].period==0)
-				SCH_delete_task(index);
+	uint8_t id;
+	for (id = 0; id<SCH_MAX_TASKS; id++) {
+		if (SCH_tasks_G[id].runMe>0) {
+			(*SCH_tasks_G[id].pTask)();
+			SCH_tasks_G[id].runMe -= 1;
+			if (SCH_tasks_G[id].period==0)
+				SCH_delete_task(id);
 		}
 	}
 }
 
-uint16_t SCH_delete_task(const uint16_t TASK_INDEX) {
-	SCH_tasks_G[TASK_INDEX].delay = 0;
-	SCH_tasks_G[TASK_INDEX].pTask = 0x0000;
-	SCH_tasks_G[TASK_INDEX].delay = 0;
-	SCH_tasks_G[TASK_INDEX].runMe = 0;
-	return TASK_INDEX;
+uint8_t SCH_delete_task(const uint8_t ID) {
+	if (ID>currentID)
+		return ID;
+	SCH_tasks_G[ID].delay = 0;
+	SCH_tasks_G[ID].pTask = 0x0000;
+	SCH_tasks_G[ID].delay = 0;
+	SCH_tasks_G[ID].runMe = 0;
+	for (uint8_t id = ID+1; id<currentID; id++)
+		SCH_tasks_G[id].taskID -= 1;
+	return ID;
 }
-
-//void SCH_report_error(void);
 

@@ -15,5 +15,7 @@ void led2_toggle();
 void led3_toggle();
 void led4_toggle();
 void led5_toggle();
+void display_timer();
+void init_tasks();
 
 #endif /* INC_TASKS_H_ */

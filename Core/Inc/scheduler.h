@@ -14,16 +14,19 @@ typedef struct {
 	uint32_t delay;
 	uint32_t period;
 	uint8_t runMe;
+	uint8_t taskID;
 } sTask;
 
 #define SCH_MAX_TASKS 40
 #define NO_TASK_ID 0
 
+extern uint8_t currentID;
+
 void SCH_init(void);
 void SCH_update(void);
-uint16_t SCH_add_task(void (*pFunction)(), unsigned int DELAY, unsigned int PERIOD);
+uint8_t SCH_add_task(void (*pFunction)(), unsigned int DELAY, unsigned int PERIOD);
 void SCH_dispatch_tasks(void);
-uint16_t SCH_delete_task(const uint16_t TASK_INDEX);
-void SCH_report_error(void);
+uint8_t SCH_delete_task(const uint8_t ID);
+//void SCH_report_error(void);
 
 #endif /* INC_SCHEDULER_H_ */
