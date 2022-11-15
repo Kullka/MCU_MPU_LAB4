@@ -1,0 +1,5 @@
+../Core/Src/tasks.c:12:6:led1_toggle	8	static
+../Core/Src/tasks.c:16:6:led2_toggle	8	static
+../Core/Src/tasks.c:20:6:led3_toggle	8	static
+../Core/Src/tasks.c:24:6:led4_toggle	8	static
+../Core/Src/tasks.c:28:6:led5_toggle	8	static
