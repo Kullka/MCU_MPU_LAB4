@@ -8,7 +8,7 @@
 #include "software_timer.h"
 #include "led.h"
 
-unsigned int time;
+uint32_t time;
 
 void timer_init() {
 	time = 0;

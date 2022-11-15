@@ -10,7 +10,7 @@
 
 #include "main.h"
 
-extern unsigned int time;
+extern uint32_t time;
 
 void timer_init();
 unsigned int get_timer();

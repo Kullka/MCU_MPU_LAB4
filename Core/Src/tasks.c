@@ -32,7 +32,7 @@ void led5_toggle() {
 
 void display_timer() {
 //	if (time%50==0) {
-		unsigned int value = get_timer();
+		uint32_t value = get_timer();
 		value = value/50;
 		display_7SEG1(value/10);
 		display_7SEG2(value%10);
