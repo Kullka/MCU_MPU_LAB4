@@ -97,7 +97,8 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  HAL_UART_Transmit(&huart1, &time, 4, 100);
+
+  HAL_UART_Transmit(&huart1, (uint8_t *)time, sizeof(time), 100);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -212,7 +213,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 115200;
+  huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -279,7 +280,9 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim ) {
 	SCH_update();
-	HAL_UART_Transmit(&huart1, &time, 4, 100);
+	char buffer[5];
+	sprintf(buffer, "%lu \n", (unsigned long)(time*10));
+	HAL_UART_Transmit(&huart1, (uint8_t *)buffer, sizeof(buffer), 100);
 }
 /* USER CODE END 4 */
 
