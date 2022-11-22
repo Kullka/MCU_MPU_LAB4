@@ -11,7 +11,7 @@
 #include "main.h"
 
 #define TICK 10
-#define TIME 20
+#define TIME 10
 extern uint32_t time;
 extern int timerFlag;
 extern int timerCounter;

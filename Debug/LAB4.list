@@ -241,7 +241,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   set_timer(TIME);
- 800022a:	2014      	movs	r0, #20
+ 800022a:	200a      	movs	r0, #10
  800022c:	f000 fa98 	bl	8000760 <set_timer>
   turn_off_all_7seg();
  8000230:	f7ff ffdc 	bl	80001ec <turn_off_all_7seg>
@@ -674,7 +674,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim ) {
  8000490:	4807      	ldr	r0, [pc, #28]	; (80004b0 <HAL_TIM_PeriodElapsedCallback+0x50>)
  8000492:	f001 fef6 	bl	8002282 <HAL_UART_Transmit>
 		set_timer(TIME);
- 8000496:	2014      	movs	r0, #20
+ 8000496:	200a      	movs	r0, #10
  8000498:	f000 f962 	bl	8000760 <set_timer>
 	}
 }
