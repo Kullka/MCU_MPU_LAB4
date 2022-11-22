@@ -10,10 +10,16 @@
 
 #include "main.h"
 
+#define TICK 10
+#define TIME 20
 extern uint32_t time;
+extern int timerFlag;
+extern int timerCounter;
 
 void timer_init();
 unsigned int get_timer();
 void update_timer();
+void set_timer(int duration);
+void timer_run();
 
 #endif /* SRC_SOFTWARE_TIMER_H_ */

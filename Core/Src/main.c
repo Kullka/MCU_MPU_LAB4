@@ -103,10 +103,17 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  set_timer(TIME);
   turn_off_all_7seg();
   SCH_init();
   init_tasks();
-  SCH_delete_task(3);
+//  SCH_delete_task(3);
+//  SCH_delete_task(2);
+//  SCH_delete_task(1);
+//  SCH_delete_task(4);
+//  SCH_delete_task(5);
+//  SCH_delete_task(0);
+//  SCH_delete_task(6);
   while (1)
   {
 	  SCH_dispatch_tasks();
@@ -246,7 +253,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, LED1_Pin|LED2_Pin|LED3_Pin|LED4_Pin
-                          |LED5_Pin, GPIO_PIN_SET);
+                          |LED5_Pin|LED6_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, a1_Pin|b1_Pin|c1_Pin|d2_Pin
@@ -255,9 +262,9 @@ static void MX_GPIO_Init(void)
                           |b2_Pin|c2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : LED1_Pin LED2_Pin LED3_Pin LED4_Pin
-                           LED5_Pin */
+                           LED5_Pin LED6_Pin */
   GPIO_InitStruct.Pin = LED1_Pin|LED2_Pin|LED3_Pin|LED4_Pin
-                          |LED5_Pin;
+                          |LED5_Pin|LED6_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -280,10 +287,14 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim ) {
-	SCH_update();
-	char buffer[5];
-	sprintf(buffer, "%lu \n", (unsigned long)(time*10));
-	HAL_UART_Transmit(&huart1, (uint8_t *)buffer, sizeof(buffer), 100);
+	timer_run();
+	if (timerFlag==1) {
+		SCH_update();
+		char buffer[5];
+		sprintf(buffer, "%u \n", (unsigned int)(time));
+		HAL_UART_Transmit(&huart1, (uint8_t *)buffer, sizeof(buffer), 100);
+		set_timer(TIME);
+	}
 }
 /* USER CODE END 4 */
 

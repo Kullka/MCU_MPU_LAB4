@@ -3,5 +3,6 @@
 ../Core/Src/tasks.c:21:6:led3_toggle	8	static
 ../Core/Src/tasks.c:25:6:led4_toggle	8	static
 ../Core/Src/tasks.c:29:6:led5_toggle	8	static
-../Core/Src/tasks.c:33:6:display_timer	16	static
-../Core/Src/tasks.c:40:6:init_tasks	32	static
+../Core/Src/tasks.c:33:6:led6_toggle	8	static
+../Core/Src/tasks.c:37:6:display_timer	16	static
+../Core/Src/tasks.c:44:6:init_tasks	40	static

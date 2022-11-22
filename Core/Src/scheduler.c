@@ -24,7 +24,6 @@ void SCH_init(void) {
 
 void SCH_update(void) {
 	uint8_t id;
-	update_timer();
 	for (id=0; id<currentID; id++) {
 		if (SCH_tasks_G[id].pTask) {
 			if (SCH_tasks_G[id].delay==0) {
@@ -56,7 +55,7 @@ uint8_t SCH_add_task(void (*pFunction)(), unsigned int DELAY, unsigned int PERIO
 
 void SCH_dispatch_tasks(void) {
 	uint8_t id;
-	for (id = 0; id<SCH_MAX_TASKS; id++) {
+	for (id = 0; id<currentID; id++) {
 		if (SCH_tasks_G[id].runMe>0) {
 			(*SCH_tasks_G[id].pTask)();
 			SCH_tasks_G[id].runMe -= 1;
