@@ -9,6 +9,7 @@
 #include "main.h"
 #include "software_timer.h"
 #include "led.h"
+#include "button.h"
 
 void led1_toggle() {
 	HAL_GPIO_TogglePin(GPIOA, LED1_Pin);
@@ -55,12 +56,12 @@ void init_tasks() {
 	pTask3 = led3_toggle;
 	pTask4 = led4_toggle;
 	pTask5 = led5_toggle;
-	pTask6 = led6_toggle;
-	SCH_add_task(ptask0, 0, 50);
+	pTask6 = getKeyInput;
+	SCH_add_task(ptask0, 2, 50);
 	SCH_add_task(pTask1, 5, 50);
 	SCH_add_task(pTask2, 10, 100);
 	SCH_add_task(pTask3, 15, 150);
 	SCH_add_task(pTask4, 20, 200);
 	SCH_add_task(pTask5, 25, 250);
-	SCH_add_task(pTask6, 30, 0);
+	SCH_add_task(pTask6, 0, 1);
 }

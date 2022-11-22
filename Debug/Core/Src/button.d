@@ -1,4 +1,4 @@
-Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/tasks.h \
+Core/Src/button.o: ../Core/Src/button.c ../Core/Src/software_timer.h \
  ../Core/Inc/main.h ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -24,9 +24,8 @@ Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/tasks.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../Core/Inc/main.h ../Core/Src/software_timer.h ../Core/Inc/led.h \
- ../Core/Inc/button.h
-../Core/Inc/tasks.h:
+ ../Core/Inc/button.h ../Core/Inc/main.h ../Core/Inc/led.h
+../Core/Src/software_timer.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -53,7 +52,6 @@ Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/tasks.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
-../Core/Inc/main.h:
-../Core/Src/software_timer.h:
-../Core/Inc/led.h:
 ../Core/Inc/button.h:
+../Core/Inc/main.h:
+../Core/Inc/led.h:
