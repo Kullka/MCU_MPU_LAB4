@@ -31,12 +31,10 @@ void led5_toggle() {
 }
 
 void display_timer() {
-//	if (time%50==0) {
-		uint32_t value = get_timer();
-		value = value/50;
-		display_7SEG1(value/10);
-		display_7SEG2(value%10);
-//	}
+	uint32_t value = get_timer();
+	value = value/50;
+	display_7SEG1(value/10);
+	display_7SEG2(value%10);
 }
 
 void init_tasks() {
